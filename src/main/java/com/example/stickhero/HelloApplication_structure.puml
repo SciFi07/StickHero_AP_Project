@@ -1,0 +1,134 @@
+@startuml
+
+interface GameObject {
+  +getPosition(): int
+  +getSize(): int
+}
+
+class Cherry {
+  -position: int
+  -size: int
+  -points: int
+  +Cherry()
+  +getPosition(): int
+  +getSize(): int
+  +getPoints(): int
+}
+
+class Stick {
+  -length: int
+  +extend()
+  +getPosition(): int
+  +getSize(): int
+}
+
+class Platform {
+  -position: int
+  -size: int
+  -width: int
+  +getPosition(): int
+  +getSize(): int
+}
+
+interface RewardCollector {
+  +flipCharacter()
+}
+
+class StickHero {
+  -player: String
+  -score: int
+  -cherries: int
+  -revives: int
+  -currentPlatform: int
+  -highestScore: int
+  -lastScore: int
+  +startGame()
+  +endGame()
+  +mainMenu(): void throws IOException, GameClassNotFoundException
+  +pauseGameMenu(): void throws GameCannotBeRestartedException
+  +gameCannotBeRestarted(): boolean
+  +revivePlayer()
+  +flipCharacter()
+  +getPosition(): int
+  +getSize(): int
+}
+
+class GameCannotBeRestartedException {
+  +GameCannotBeRestartedException(String)
+}
+
+class GameClassNotFoundException {
+  +GameClassNotFoundException(String, Throwable)
+}
+
+class Game {
+  -currentLevel: int
+  -gameObjList: List<GameObject>
+  +game()
+  +cherryCollected()
+  +revivePlayer()
+}
+
+interface Menu {
+  +displayMenu()
+  +curGame()
+}
+
+class PauseGameMenu {
+  +displayMenu()
+  +resumeGame()
+  +options()
+  +curGame()
+}
+
+class MainMenu {
+  +displayMenu()
+  +startNewGame()
+  +loadGame()
+  +exitGame()
+  +curGame()
+}
+
+class GameEndMenu {
+  +displayMenu()
+  +showScore()
+  +returnToMainMenu()
+  +curGame()
+}
+
+class HelloApplication {
+  +main(args: String[])
+  +start(stage: Stage)
+}
+
+GameObject <|-- Cherry
+GameObject <|-- Platform
+GameObject <|-- StickHero
+GameObject <|-- Stick
+GameObject <|.. RewardCollector
+GameObject <|.. Game
+
+RewardCollector <|.. StickHero
+
+Game *-- "1" GameObject
+
+StickHero *-- MainMenu
+StickHero *-- PauseGameMenu
+StickHero *-- GameEndMenu
+
+GameCannotBeRestartedException -|> Java.lang.Exception
+GameClassNotFoundException -|> Java.lang.Exception
+
+MainMenu <|.. GameEndMenu
+MainMenu <|.. PauseGameMenu
+
+Menu <|-- MainMenu
+Menu <|-- PauseGameMenu
+Menu <|-- GameEndMenu
+
+GameCannotBeRestartedException <-- StickHero
+GameClassNotFoundException <-- StickHero
+
+HelloApplication *-- MainMenu
+
+@enduml
