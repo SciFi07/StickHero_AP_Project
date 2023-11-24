@@ -3,14 +3,10 @@ package com.example.stickhero;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,12 +93,10 @@ class StickHero implements GameObject, RewardCollector {
 
     public void startGame() {
         // Implementation for starting the game
-        System.out.println("Game started");
     }
 
     public void endGame() {
         // Implementation for ending the game
-        System.out.println("Game ended");
     }
 
     public void mainMenu() throws IOException, GameClassNotFoundException {
@@ -145,12 +139,10 @@ class StickHero implements GameObject, RewardCollector {
 
     public void revivePlayer() {
         // Implementation for reviving the player using cherries
-        System.out.println("Player revived");
     }
 
     public void flipCharacter() {
         // Implementation for flipping the character to collect rewards
-        System.out.println("Character flipped");
     }
 
     // Implement GameObject interface methods
@@ -187,17 +179,14 @@ class Game {
 
     public void game() {
         // Implementation for the main game loop and mechanics
-        System.out.println("Game in progress");
     }
 
     public void cherryCollected() {
         // Implementation for handling cherry collection
-        System.out.println("Cherry collected");
     }
 
     public void revivePlayer() {
         // Implementation for reviving the player in the game
-        System.out.println("Player revived");
     }
 
     // Other getters and setters
@@ -218,7 +207,6 @@ class PauseGameMenu implements Menu {
 
     public void resumeGame() {
         // Implementation for resuming the game
-        System.out.println("Game resumed");
     }
 
     public void options() {
@@ -241,17 +229,14 @@ class MainMenu implements Menu {
 
     public void startNewGame() {
         // Implementation for starting a new game
-        System.out.println("New game started");
     }
 
     public void loadGame() {
         // Implementation for loading a saved game
-        System.out.println("Game loaded");
     }
 
     public void exitGame() {
         // Implementation for exiting the game
-        System.out.println("Game exited");
     }
 
     @Override
@@ -270,12 +255,10 @@ class GameEndMenu implements Menu {
 
     public void showScore() {
         // Implementation for displaying the final score
-        System.out.println("Final score displayed");
     }
 
     public void returnToMainMenu() {
         // Implementation for returning to the main menu after the game ends
-        System.out.println("Returned to Main Menu");
     }
 
     @Override
@@ -285,32 +268,17 @@ class GameEndMenu implements Menu {
     }
 }
 
+
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        try (InputStream iconStream = Files.newInputStream(Paths.get("/Users/stanzingyalpo/Documents/StickHero/src/main/java/icon.png"))) {
-            Image icon = new Image(iconStream);
-            stage.getIcons().add(icon);
-        } catch (IOException e) {
-            // Handle exception (e.g., log it) or throw it
-            e.printStackTrace();
-        }
-
-        stage.setResizable(false);
-//        stage.setFullScreen(true);
-
-        FXMLLoader fxmlLoader1 = new FXMLLoader(HelloApplication.class.getResource("scene.fxml"));
-
-        stage.setTitle("Stick Hero");
+        Scene scene = new Scene(fxmlLoader.load(), 680, 440);
+        stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
-
     public static void main(String[] args) {
         launch();
     }
 }
-
